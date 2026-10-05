@@ -9,3 +9,9 @@ class StudentApi(APIView):
         students=Student.objects.all()
         serializer=StudentSerializer(students,many=True)
         return Response(serializer.data)
+    def post(self,req):
+        serializer=StudentSerializer(data=req.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)

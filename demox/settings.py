@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,10 +84,10 @@ DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ.get('db_name'),
-            'HOST': os.environ.get('db_host'),
+            'HOST': os.getenv('db_host'),
             'PORT': os.environ.get('port'),
-            'USER': os.environ.get('username'),
-            'PASSWORD': os.environ.get('password')
+            'USER': os.environ.get('db_user'),
+            'PASSWORD': os.getenv('password')
         }
 }
 
@@ -129,3 +132,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+print('database_name',os.environ.get('db_name'))
+print('host_name',os.getenv('db_host'))
+print('port_name',os.environ.get('port'))
+print('username',os.environ.get('db_user'))
+print('password',os.getenv('password'))         
+        
